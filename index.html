@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>I Miss You!</title>
+  <title>I Miss You 💖</title>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
@@ -22,179 +22,220 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 2rem 1rem 3rem;
+      padding: 2rem 1rem 5rem;
       overflow-x: hidden;
     }
-    .bg-hearts {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none; z-index: 0; overflow: hidden;
-    }
-    .heart-float {
-      position: absolute; opacity: 0;
-      animation: floatUp 7s infinite ease-in-out;
-    }
-    @keyframes floatUp {
-      0%   { transform: translateY(100vh) scale(0.7) rotate(-10deg); opacity: 0; }
-      10%  { opacity: 0.15; }
-      90%  { opacity: 0.12; }
-      100% { transform: translateY(-10vh) scale(1.1) rotate(10deg); opacity: 0; }
-    }
-    .card {
-      position: relative; z-index: 1;
-      background: rgba(255,255,255,0.72);
-      backdrop-filter: blur(12px);
-      border-radius: 32px;
-      border: 2px solid rgba(244,143,177,0.4);
-      padding: 2.5rem 2rem;
-      max-width: 520px; width: 100%;
-      box-shadow: 0 8px 40px rgba(233,30,140,0.12);
-      text-align: center;
-    }
-    .stars { font-size: 1.3rem; letter-spacing: 8px; color: var(--pink); animation: twinkle 2s infinite alternate; margin-bottom: 0.5rem; }
-    @keyframes twinkle { from { opacity: 0.5; } to { opacity: 1; } }
-    .main-title {
-      font-family: 'Pacifico', cursive;
-      font-size: clamp(2rem, 8vw, 2.8rem);
-      color: var(--pink); text-shadow: 3px 3px 0 #ffb3d1;
-      margin: 0.3rem 0;
-      animation: titleBounce 2.2s infinite alternate ease-in-out;
-    }
-    @keyframes titleBounce {
-      from { transform: translateY(0) rotate(-1deg); }
-      to   { transform: translateY(-8px) rotate(1deg); }
-    }
-    .emoji-strip { font-size: 1.8rem; margin: 0.5rem 0; animation: sway 3s ease-in-out infinite alternate; display: inline-block; }
-    @keyframes sway { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
-    .msg-box {
-      background: rgba(255,255,255,0.85);
-      border: 2px dashed var(--pink-light);
-      border-radius: 20px; padding: 1.4rem 1.6rem; margin: 1.2rem 0;
-    }
-    .msg-greeting { font-size: 1.25rem; font-weight: 800; color: var(--pink-dark); margin-bottom: 0.7rem; }
-    .msg-body { font-size: 1rem; color: var(--pink-deep); line-height: 1.9; }
-    .stickers { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 1rem 0; }
-    .sticker {
-      background: #fff; border: 1.5px solid var(--pink-light);
-      border-radius: 50px; padding: 5px 14px;
-      font-size: 0.9rem; color: var(--pink); font-weight: 700;
-      animation: popIn 0.4s ease backwards;
-    }
-    .sticker:nth-child(1) { animation-delay: 0.1s; }
-    .sticker:nth-child(2) { animation-delay: 0.2s; }
-    .sticker:nth-child(3) { animation-delay: 0.3s; }
-    @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    .divider { border: none; height: 1.5px; background: linear-gradient(to right, transparent, var(--pink-light), transparent); margin: 1.2rem 0; }
-    .music-label {
-      font-size: 0.95rem; font-weight: 800; color: var(--pink-deep);
-      margin-bottom: 0.9rem;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-    }
-    .note { display: inline-block; animation: noteDance 1.1s infinite alternate; font-size: 1.2rem; }
-    @keyframes noteDance {
-      from { transform: translateY(0) rotate(-12deg); }
-      to   { transform: translateY(-5px) rotate(12deg); }
-    }
 
-    /* Music card */
-    .music-card {
-      background: linear-gradient(135deg, #fff0f5, #fce4ec);
-      border: 2px solid var(--pink-light);
-      border-radius: 20px; padding: 1rem 1.2rem;
-      display: flex; align-items: center; gap: 1rem;
-      box-shadow: 0 4px 18px rgba(233,30,140,0.14);
-      text-align: left; text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;
+    /* ── SPLASH ── */
+    #splash {
+      position: fixed; inset: 0; z-index: 9999;
+      background: linear-gradient(135deg, #fff0f5, #fce4ec, #fff9c4);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 1.2rem;
+      cursor: pointer; transition: opacity 0.7s ease;
     }
-    .music-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(233,30,140,0.22); }
-    .music-thumb {
-      width: 72px; height: 72px; border-radius: 12px;
-      flex-shrink: 0; position: relative; overflow: hidden;
-      background: linear-gradient(135deg, var(--pink), var(--pink-dark));
-      display: flex; align-items: center; justify-content: center;
+    #splash.hide { opacity: 0; pointer-events: none; }
+    .splash-emoji { font-size: 4rem; animation: splashPulse 1.4s infinite alternate; }
+    @keyframes splashPulse { from { transform: scale(1); } to { transform: scale(1.2); } }
+    .splash-title {
+      font-family: 'Pacifico', cursive; font-size: 1.8rem;
+      color: var(--pink); text-shadow: 2px 2px 0 #ffb3d1;
+      text-align: center; padding: 0 1.5rem; line-height: 1.4;
     }
-    .music-thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
-    .play-icon {
-      position: absolute;
-      width: 28px; height: 28px;
-      background: rgba(255,255,255,0.92); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.85rem; color: var(--pink);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-    }
-    .music-info { flex: 1; min-width: 0; }
-    .music-song-title { font-size: 1rem; font-weight: 800; color: var(--pink-dark); margin-bottom: 3px; }
-    .music-artist { font-size: 0.85rem; color: var(--pink-deep); margin-bottom: 7px; opacity: 0.85; }
-    .yt-open-btn {
-      display: inline-flex; align-items: center; gap: 5px;
-      background: var(--pink); color: #fff;
-      border: none; border-radius: 30px; padding: 5px 14px;
-      font-family: 'Nunito', sans-serif; font-size: 0.8rem; font-weight: 800;
-      cursor: pointer; text-decoration: none; transition: background 0.2s;
-    }
-    .yt-open-btn:hover { background: var(--pink-dark); }
-    .wave-bars { display: flex; align-items: flex-end; gap: 2px; height: 22px; flex-shrink: 0; }
-    .wave-bar { width: 3px; background: var(--pink); border-radius: 3px; animation: waveAnim 1s infinite ease-in-out; }
-    .wave-bar:nth-child(2) { animation-delay: 0.15s; }
-    .wave-bar:nth-child(3) { animation-delay: 0.3s; }
-    .wave-bar:nth-child(4) { animation-delay: 0.45s; }
-    .wave-bar:nth-child(5) { animation-delay: 0.6s; }
-    @keyframes waveAnim { 0%,100% { height: 4px; } 50% { height: 20px; } }
-    .music-hint { font-size: 0.78rem; color: var(--pink-dark); margin-top: 8px; opacity: 0.75; }
-
-    /* QR */
-    .qr-section { margin-top: 1.5rem; }
-    .qr-title { font-size: 0.92rem; font-weight: 800; color: var(--pink-deep); margin-bottom: 0.8rem; }
-    .qr-card {
-      display: inline-block; background: #fff;
-      border: 2.5px solid var(--pink-light); border-radius: 18px;
-      padding: 12px; box-shadow: 0 4px 16px rgba(233,30,140,0.12); margin-bottom: 1rem;
-    }
-    #qr-output canvas, #qr-output img { border-radius: 8px; display: block; }
-    .url-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 10px; }
-    .url-input {
-      flex: 1; min-width: 180px; padding: 9px 16px;
-      border-radius: 40px; border: 1.5px solid var(--pink-light);
-      font-family: 'Nunito', sans-serif; font-size: 0.88rem;
-      color: var(--pink-deep); background: var(--pink-pale); outline: none;
-    }
-    .url-input:focus { border-color: var(--pink); }
-    .url-input::placeholder { color: #f48fb1; }
-    .btn-gen {
+    .splash-sub { font-size: 0.95rem; color: var(--pink-deep); font-weight: 700; text-align: center; }
+    .tap-btn {
       background: var(--pink); color: #fff; border: none;
-      border-radius: 40px; padding: 9px 20px;
-      font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 800;
-      cursor: pointer; transition: background 0.2s, transform 0.15s;
+      border-radius: 50px; padding: 15px 40px;
+      font-family: 'Nunito', sans-serif; font-size: 1.15rem; font-weight: 800;
+      cursor: pointer; box-shadow: 0 4px 24px rgba(233,30,140,0.4);
+      animation: tapPulse 1.5s infinite alternate; letter-spacing: 0.5px;
     }
-    .btn-gen:hover { background: var(--pink-dark); transform: scale(1.04); }
-    .btn-dl {
-      background: transparent; color: var(--pink); border: 2px solid var(--pink);
-      border-radius: 40px; padding: 8px 20px;
-      font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 800;
-      cursor: pointer; transition: all 0.2s;
+    @keyframes tapPulse {
+      from { transform: scale(1); box-shadow: 0 4px 20px rgba(233,30,140,0.35); }
+      to   { transform: scale(1.06); box-shadow: 0 8px 32px rgba(233,30,140,0.55); }
     }
-    .btn-dl:hover { background: var(--pink); color: #fff; }
-    .footer { margin-top: 1.5rem; font-size: 0.78rem; color: var(--pink-dark); opacity: 0.65; line-height: 1.8; }
-    .sparkle { position: absolute; font-size: 1.4rem; animation: sparkSpin 3s linear infinite; pointer-events: none; }
-    @keyframes sparkSpin {
-      0%   { transform: rotate(0deg) scale(1); opacity: 0.7; }
-      50%  { transform: rotate(180deg) scale(1.2); opacity: 1; }
-      100% { transform: rotate(360deg) scale(1); opacity: 0.7; }
+    .splash-hint { font-size: 0.78rem; color: var(--pink-dark); opacity: 0.55; }
+
+    /* ── FLOATING HEARTS ── */
+    .bg-hearts { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; overflow:hidden; }
+    .heart-float { position:absolute; opacity:0; animation: floatUp 7s infinite ease-in-out; }
+    @keyframes floatUp {
+      0%   { transform: translateY(100vh) scale(0.7) rotate(-10deg); opacity:0; }
+      10%  { opacity:0.15; }
+      90%  { opacity:0.12; }
+      100% { transform: translateY(-10vh) scale(1.1) rotate(10deg); opacity:0; }
     }
-    .sparkle.tl { top: 14px; left: 16px; }
-    .sparkle.tr { top: 14px; right: 16px; animation-direction: reverse; }
-    .sparkle.bl { bottom: 14px; left: 16px; animation-delay: 1s; }
-    .sparkle.br { bottom: 14px; right: 16px; animation-delay: 1.5s; animation-direction: reverse; }
-    @media (max-width: 480px) {
-      .card { padding: 1.8rem 1.2rem; border-radius: 22px; }
-      .music-card { gap: 0.7rem; }
+
+    /* ── STICKY MUSIC BAR ── */
+    #music-bar {
+      position: fixed; bottom:0; left:0; right:0; z-index:100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(14px);
+      border-top: 2px solid var(--pink-light);
+      padding: 10px 20px;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 -4px 24px rgba(233,30,140,0.14);
+    }
+    .bar-thumb { width:40px; height:40px; border-radius:8px; overflow:hidden; flex-shrink:0; border:1.5px solid var(--pink-light); }
+    .bar-thumb img { width:100%; height:100%; object-fit:cover; }
+    .bar-info { flex:1; min-width:0; }
+    .bar-song { font-size:0.83rem; font-weight:800; color:var(--pink-dark); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .bar-artist { font-size:0.72rem; color:var(--pink-deep); opacity:0.8; }
+    .bar-controls { display:flex; align-items:center; gap:10px; }
+    .bar-vol { display:flex; align-items:center; gap:5px; font-size:0.72rem; color:var(--pink-deep); font-weight:700; }
+    .vol-slider {
+      -webkit-appearance:none; appearance:none;
+      width:70px; height:4px; border-radius:4px;
+      background: var(--pink-light); outline:none; cursor:pointer;
+    }
+    .vol-slider::-webkit-slider-thumb {
+      -webkit-appearance:none; appearance:none;
+      width:14px; height:14px; border-radius:50%;
+      background: var(--pink); cursor:pointer;
+    }
+    .bar-play-btn {
+      width:38px; height:38px; border-radius:50%;
+      background:var(--pink); color:#fff; border:none;
+      font-size:1rem; cursor:pointer; display:flex;
+      align-items:center; justify-content:center;
+      transition: background 0.2s, transform 0.15s; flex-shrink:0;
+    }
+    .bar-play-btn:hover { background:var(--pink-dark); transform:scale(1.08); }
+    .wave-bars { display:flex; align-items:flex-end; gap:2px; height:18px; }
+    .wave-bar { width:3px; background:var(--pink); border-radius:3px; animation:waveAnim 1s infinite ease-in-out; }
+    .wave-bar:nth-child(2){ animation-delay:0.15s; }
+    .wave-bar:nth-child(3){ animation-delay:0.3s; }
+    .wave-bar:nth-child(4){ animation-delay:0.45s; }
+    .wave-bar:nth-child(5){ animation-delay:0.6s; }
+    @keyframes waveAnim { 0%,100%{height:3px} 50%{height:16px} }
+    .wave-bars.paused .wave-bar { animation-play-state:paused; height:5px; }
+
+    /* ── CARD ── */
+    .card {
+      position:relative; z-index:1;
+      background:rgba(255,255,255,0.72);
+      backdrop-filter:blur(12px);
+      border-radius:32px; border:2px solid rgba(244,143,177,0.4);
+      padding:2.5rem 2rem 2rem; max-width:520px; width:100%;
+      box-shadow:0 8px 40px rgba(233,30,140,0.12); text-align:center;
+    }
+    .stars { font-size:1.3rem; letter-spacing:8px; color:var(--pink); animation:twinkle 2s infinite alternate; margin-bottom:0.5rem; }
+    @keyframes twinkle { from{opacity:0.5} to{opacity:1} }
+    .main-title {
+      font-family:'Pacifico',cursive; font-size:clamp(2rem,8vw,2.8rem);
+      color:var(--pink); text-shadow:3px 3px 0 #ffb3d1; margin:0.3rem 0;
+      animation:titleBounce 2.2s infinite alternate ease-in-out;
+    }
+    @keyframes titleBounce { from{transform:translateY(0) rotate(-1deg)} to{transform:translateY(-8px) rotate(1deg)} }
+    .emoji-strip { font-size:1.8rem; margin:0.5rem 0; animation:sway 3s ease-in-out infinite alternate; display:inline-block; }
+    @keyframes sway { from{transform:rotate(-4deg)} to{transform:rotate(4deg)} }
+
+    .msg-box {
+      background:rgba(255,255,255,0.85); border:2px dashed var(--pink-light);
+      border-radius:20px; padding:1.4rem 1.6rem; margin:1.2rem 0;
+    }
+    .msg-greeting { font-size:1.2rem; font-weight:800; color:var(--pink-dark); margin-bottom:0.7rem; }
+    .msg-body { font-size:0.97rem; color:var(--pink-deep); line-height:1.9; }
+
+    .stickers { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:1rem 0; }
+    .sticker { background:#fff; border:1.5px solid var(--pink-light); border-radius:50px; padding:5px 14px; font-size:0.9rem; color:var(--pink); font-weight:700; }
+
+    .divider { border:none; height:1.5px; background:linear-gradient(to right,transparent,var(--pink-light),transparent); margin:1.2rem 0; }
+
+    .music-label { font-size:0.95rem; font-weight:800; color:var(--pink-deep); margin-bottom:0.9rem; display:flex; align-items:center; justify-content:center; gap:8px; }
+    .note { display:inline-block; animation:noteDance 1.1s infinite alternate; font-size:1.2rem; }
+    @keyframes noteDance { from{transform:translateY(0) rotate(-12deg)} to{transform:translateY(-5px) rotate(12deg)} }
+
+    .music-card {
+      background:linear-gradient(135deg,#fff0f5,#fce4ec);
+      border:2px solid var(--pink-light); border-radius:20px; padding:1rem 1.2rem;
+      display:flex; align-items:center; gap:1rem;
+      box-shadow:0 4px 18px rgba(233,30,140,0.14);
+      text-align:left; text-decoration:none;
+      transition:transform 0.2s,box-shadow 0.2s;
+    }
+    .music-card:hover { transform:translateY(-3px); box-shadow:0 8px 28px rgba(233,30,140,0.22); }
+    .music-thumb { width:64px; height:64px; border-radius:12px; flex-shrink:0; position:relative; overflow:hidden; background:var(--pink); }
+    .music-thumb img { width:100%; height:100%; object-fit:cover; }
+    .play-icon { position:absolute; width:26px; height:26px; background:rgba(255,255,255,0.92); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.8rem; color:var(--pink); top:50%; left:50%; transform:translate(-50%,-50%); }
+    .music-info { flex:1; min-width:0; }
+    .music-song-title { font-size:1rem; font-weight:800; color:var(--pink-dark); margin-bottom:3px; }
+    .music-artist { font-size:0.85rem; color:var(--pink-deep); margin-bottom:7px; opacity:0.85; }
+    .yt-open-btn { display:inline-flex; align-items:center; gap:5px; background:var(--pink); color:#fff; border:none; border-radius:30px; padding:5px 14px; font-family:'Nunito',sans-serif; font-size:0.8rem; font-weight:800; cursor:pointer; text-decoration:none; }
+    .music-hint { font-size:0.78rem; color:var(--pink-dark); margin-top:8px; opacity:0.75; }
+
+    .qr-section { margin-top:1.5rem; }
+    .qr-title { font-size:0.92rem; font-weight:800; color:var(--pink-deep); margin-bottom:0.8rem; }
+    .qr-card { display:inline-block; background:#fff; border:2.5px solid var(--pink-light); border-radius:18px; padding:12px; box-shadow:0 4px 16px rgba(233,30,140,0.12); margin-bottom:1rem; }
+    #qr-output canvas, #qr-output img { border-radius:8px; display:block; }
+    .url-row { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-bottom:10px; }
+    .url-input { flex:1; min-width:180px; padding:9px 16px; border-radius:40px; border:1.5px solid var(--pink-light); font-family:'Nunito',sans-serif; font-size:0.88rem; color:var(--pink-deep); background:var(--pink-pale); outline:none; }
+    .url-input:focus { border-color:var(--pink); }
+    .url-input::placeholder { color:#f48fb1; }
+    .btn-gen { background:var(--pink); color:#fff; border:none; border-radius:40px; padding:9px 20px; font-family:'Nunito',sans-serif; font-size:0.88rem; font-weight:800; cursor:pointer; }
+    .btn-gen:hover { background:var(--pink-dark); }
+    .btn-dl { background:transparent; color:var(--pink); border:2px solid var(--pink); border-radius:40px; padding:8px 20px; font-family:'Nunito',sans-serif; font-size:0.85rem; font-weight:800; cursor:pointer; transition:all 0.2s; }
+    .btn-dl:hover { background:var(--pink); color:#fff; }
+    .footer { margin-top:1.5rem; font-size:0.78rem; color:var(--pink-dark); opacity:0.65; line-height:1.8; }
+    .sparkle { position:absolute; font-size:1.4rem; animation:sparkSpin 3s linear infinite; pointer-events:none; }
+    @keyframes sparkSpin { 0%{transform:rotate(0deg);opacity:0.7} 50%{transform:rotate(180deg);opacity:1} 100%{transform:rotate(360deg);opacity:0.7} }
+    .sparkle.tl { top:14px; left:16px; }
+    .sparkle.tr { top:14px; right:16px; animation-direction:reverse; }
+    .sparkle.bl { bottom:14px; left:16px; animation-delay:1s; }
+    .sparkle.br { bottom:14px; right:16px; animation-delay:1.5s; animation-direction:reverse; }
+
+    @media(max-width:480px){
+      .card { padding:1.8rem 1.2rem 2rem; border-radius:22px; }
+      .bar-vol { display:none; }
     }
   </style>
 </head>
 <body>
 
+  <!-- SPLASH -->
+  <div id="splash" onclick="startExperience()">
+    <div class="splash-emoji">💌</div>
+    <div class="splash-title">Usama Awan sent you<br>a special message...</div>
+    <button class="tap-btn">💖 Please Open</button>
+    <div class="splash-hint">Tap anywhere to continue</div>
+  </div>
+
+  <!-- Real audio element — this plays with full sound! -->
+  <audio id="bgAudio" loop preload="auto">
+    <!-- Romantic piano instrumental from free CDN -->
+    <source src="https://mp3tourl.com/audio/1777895464569-c4083b70-4309-40e9-8668-74958f858eba.mp3" type="audio/mpeg">
+    <source src="https://mp3tourl.com/audio/1777895464569-c4083b70-4309-40e9-8668-74958f858eba.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="bg-hearts" id="bgHearts"></div>
 
+  <!-- STICKY MUSIC BAR -->
+  <div id="music-bar">
+    <div class="bar-thumb">
+      <img src="https://img.youtube.com/vi/oafxkMv4xnc/mqdefault.jpg" alt="Bairan"
+           onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22><rect fill=%22%23e91e8c%22 width=%2240%22 height=%2240%22 rx=%228%22/><text x=%2250%25%22 y=%2255%25%22 font-size=%2218%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>🎵</text></svg>'"/>
+    </div>
+    <div class="bar-info">
+      <div class="bar-song">Bairan 💕 — Banjaare</div>
+      <div class="bar-artist" id="barStatus">▶ Tap "Open with Music" to start</div>
+    </div>
+    <div class="bar-controls">
+      <div class="bar-vol">
+        🔊
+        <input type="range" class="vol-slider" id="volSlider" min="0" max="1" step="0.05" value="0.8" oninput="setVolume(this.value)"/>
+      </div>
+      <div class="wave-bars paused" id="waveBars">
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+      </div>
+      <button class="bar-play-btn" id="playBtn" onclick="togglePlay()">▶</button>
+    </div>
+  </div>
+
+  <!-- CARD -->
   <div class="card">
     <span class="sparkle tl">✨</span>
     <span class="sparkle tr">🌸</span>
@@ -202,28 +243,29 @@
     <span class="sparkle br">✨</span>
 
     <div class="stars">✦ ✦ ✦</div>
-    <h1 class="main-title">I Miss You (Ishuu) 💖</h1>
+    <h1 class="main-title">I Miss You (Ishuu)💖</h1>
     <div class="emoji-strip">🌸 💖 🌸</div>
 
     <div class="msg-box">
-      <div class="msg-greeting">AssalamuAlaikum... 💌 <br> Kia haaaaal haiii.... </div>
+      <div class="msg-greeting">AssalamuAlaikum... 💌<br>Kia haaaaal haiii....</div>
       <div class="msg-body">
         Some days feel incomplete without you.<br>
         Your laugh, your energy, your vibe —<br>
-        I genuinely miss all of it! 🥺✨<br>
+        I genuinely miss all of it! 😭✨<br>
         Distance doesn't change anything.<br>
-        You'll always be my. 💛
-        <br><br><br>
-        Last mai na ramadan mai kaha tha milny ka tb kah rhi tha ramadan ka bad...<br>
-        Ramadan ko guzry 1.5 month ho gaye haii betaa koi khayaaal hai tumhy 🥺....<br>
-        Mai April ka month bohat busy tha, itna busy tha mai ghr bhi 3 weeks ka bad gya record lagaya...🥲<br>
-        Basically, probation may ka month mai complete hona haiii... Is lea mai koi leave nhi kar rha...<br>
-        Or phr April mai hi client sa meeting ho gaye or work start kar dea client sath, but client level haii...<br>
-        baki betaaa ap jo pakriii nhi ja rhii na wo bssss mai zra kaaaaafi busy thaa but tumhy bhi khayal koi nhi hova🥺......<br>
+        You'll always be my. 💛<br><br>
+
+        Last mai na ramadan mai kaha tha milny ka tb kah rhi tha ramadan ka bad...<br><br>
+        Ramadan ko guzry 1.5 month ho gaye haii betaa koi khayaal hai tumhy 😳....<br><br>
+        Mai April ka month bohat busy tha, itna busy tha mai ghr bhi 3 weeks ka bad gya record lagaya...😁<br><br>
+        Basically, probation may ka month mai complete hona haiii... Is lea mai koi leave nhi kar rha...<br><br>
+        Or phr April mai hi client sa meeting ho gaye or work start kar dea client sath, but client level haii...<br><br>
+        baki betaaa ap jo pakriiii nhi ja rhii na wo bssss mai zra kaaaaafi busy tha but tumhy bhi khayal koi nhi hova......<br><br>
+        mujhty to tumhariii shakal hi bhoool gaye haiii pagliii.....<br>
         mujhy apny office ki current location send krna mai bhoool gya hooo....<br>
-        baki snap sa idea ho jata hoga meri kidhr hooo location wala filter bhi isi lea add krta pta chal jaye.....<br>
-        ab batao kia scene haii ab phr kia krna haii.... <br>
-        baki meri yahi haii dukh baaaari dastan...🥺<br>
+        Rider ko bhejwana haii.....<br><br>
+        baki snap sa idea ho jata hoga meri kidhr hooo location wala filter bhi isi lea add krta pta chal jaye.....<br><br>
+        ab batao kia scene haii ab phr kia krna haii.... baki meri yahi haii dukh baaaari dastan...😳<br><br>
         Allah Hafiz
       </div>
     </div>
@@ -238,57 +280,45 @@
 
     <div class="music-label">
       <span class="note">🎵</span>
-      Bairan by Banjaare
+      Bairan by Banjaare — just for you
       <span class="note">🎶</span>
     </div>
 
     <a class="music-card" href="https://www.youtube.com/watch?v=oafxkMv4xnc" target="_blank" rel="noopener">
       <div class="music-thumb">
-        <img
-          src="https://img.youtube.com/vi/oafxkMv4xnc/mqdefault.jpg"
-          alt="Bairan by Banjaare"
-          onerror="this.style.display='none';"
-        />
+        <img src="https://img.youtube.com/vi/oafxkMv4xnc/mqdefault.jpg" alt="Bairan" onerror="this.style.display='none';"/>
         <div class="play-icon">▶</div>
       </div>
       <div class="music-info">
         <div class="music-song-title">Bairan 💕</div>
         <div class="music-artist">by Banjaare</div>
-        <span class="yt-open-btn">▶ Play on YouTube</span>
-      </div>
-      <div class="wave-bars">
-        <div class="wave-bar" style="height:6px"></div>
-        <div class="wave-bar" style="height:14px"></div>
-        <div class="wave-bar" style="height:8px"></div>
-        <div class="wave-bar" style="height:18px"></div>
-        <div class="wave-bar" style="height:10px"></div>
+        <span class="yt-open-btn">▶ Full Song on YouTube</span>
       </div>
     </a>
-    <p class="music-hint">💕 Click the card </p>
+    <p class="music-hint">💕 Background mein music chal raha hai — ya full song YouTube pe sunlo</p>
 
     <hr class="divider"/>
 
     <div class="qr-section">
       <div class="qr-title">📱 Scan QR Code to open this page</div>
-      <div class="qr-card">
-        <div id="qr-output"></div>
-      </div>
+      <div class="qr-card"><div id="qr-output"></div></div>
       <div class="url-row">
-        <input class="url-input" id="urlInput" type="text" placeholder="Paste your hosted page URL here..."/>
+        <input class="url-input" id="urlInput" type="text" placeholder="Paste your hosted page URL..."/>
         <button class="btn-gen" onclick="generateQR()">Generate QR</button>
       </div>
       <button class="btn-dl" onclick="downloadQR()">⬇ Download QR Code</button>
     </div>
 
     <div class="footer">
-      Made just for u 💖 <br>
+      Make just for u<br>
       Bairan — Banjaare 🎵
     </div>
   </div>
 
   <script>
-    const heartContainer = document.getElementById('bgHearts');
+    // ── Floating hearts ──
     const heartEmojis = ['💖','🌸','✨','💕','🎀','💗','🌷','💫','🩷','⭐'];
+    const hc = document.getElementById('bgHearts');
     for (let i = 0; i < 18; i++) {
       const el = document.createElement('div');
       el.className = 'heart-float';
@@ -297,9 +327,52 @@
       el.style.animationDelay = (Math.random() * 7) + 's';
       el.style.animationDuration = (6 + Math.random() * 6) + 's';
       el.style.fontSize = (0.9 + Math.random() * 1.2) + 'rem';
-      heartContainer.appendChild(el);
+      hc.appendChild(el);
     }
 
+    // ── Audio ──
+    const audio = document.getElementById('bgAudio');
+    let playing = false;
+
+    function startExperience() {
+      const splash = document.getElementById('splash');
+      splash.classList.add('hide');
+      setTimeout(() => splash.style.display = 'none', 750);
+
+      audio.volume = 0.8;
+      audio.play().then(() => {
+        playing = true;
+        updateUI();
+      }).catch(err => {
+        console.warn('Audio play failed:', err);
+      });
+    }
+
+    function togglePlay() {
+      if (playing) {
+        audio.pause();
+        playing = false;
+      } else {
+        audio.play();
+        playing = true;
+      }
+      updateUI();
+    }
+
+    function setVolume(val) {
+      audio.volume = parseFloat(val);
+    }
+
+    function updateUI() {
+      const btn = document.getElementById('playBtn');
+      const bars = document.getElementById('waveBars');
+      const status = document.getElementById('barStatus');
+      btn.textContent = playing ? '⏸' : '▶';
+      bars.classList.toggle('paused', !playing);
+      status.textContent = playing ? '♫ Playing for you...' : '⏸ Paused';
+    }
+
+    // ── QR ──
     let qrInstance = null;
     function generateQR() {
       const url = document.getElementById('urlInput').value.trim() || window.location.href;
@@ -311,20 +384,18 @@
           colorDark: '#c2185b', colorLight: '#fff0f5',
           correctLevel: QRCode.CorrectLevel.H
         });
-      } catch(e) { console.error(e); }
+      } catch(e) {}
     }
-
     function downloadQR() {
       const canvas = document.querySelector('#qr-output canvas');
       const img = document.querySelector('#qr-output img');
       const el = canvas || img;
       if (!el) return;
-      const link = document.createElement('a');
-      link.download = 'miss-you-qr.png';
-      link.href = canvas ? canvas.toDataURL('image/png') : img.src;
-      link.click();
+      const a = document.createElement('a');
+      a.download = 'miss-you-qr.png';
+      a.href = canvas? canvas.toDataURL('image/png') : img.src;
+      a.click();
     }
-
     window.addEventListener('load', () => {
       document.getElementById('urlInput').value = window.location.href;
       generateQR();
